@@ -972,10 +972,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const exec = __importStar(__webpack_require__(986));
+const path = __importStar(__webpack_require__(622));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield exec.exec(`choco install vswhere -v -y -force`);
+            const toolpath = path.join(process.env.GITHUB_WORKSPACE, 'tools');
+            yield exec.exec(`choco install vswhere -v -y -force --cache-location=${toolpath}`);
         }
         catch (error) {
             core.setFailed(error.message);
